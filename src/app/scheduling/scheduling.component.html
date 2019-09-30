@@ -1,0 +1,69 @@
+<mat-toolbar>
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <img src="../../assets/images/calander.jpg" alt="calender" id="calender">
+  <span id="name">Calender</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button>Today</button>
+  <button mat-icon-button aria-label="Example icon-button with a heart icon">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Example icon-button with a heart icon">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+  
+  <span class="example-spacer"></span>
+  <button id="roomList" mat-button [matMenuTriggerFor]="roomList">Select Room</button>
+  <mat-menu #roomList="matMenu">
+    <button mat-menu-item>Room 1</button>
+    <button mat-menu-item>Room 2</button>
+    <button mat-menu-item>Room 3</button>
+    <button mat-menu-item>Room 4</button>
+  </mat-menu>
+  <mat-form-field class="example-full-width">
+    <input type="text" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <button id="viewList" mat-button [matMenuTriggerFor]="calenderView">Select View</button>
+  <mat-menu #calenderView="matMenu">
+    <button mat-menu-item>Month</button>
+    <button mat-menu-item>Week</button>
+    <button mat-menu-item>Day</button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [mode]="(isHandset$ | async) ? 'push' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar><button mat-raised-button id="createButton">
+      <svg width="36" height="36" viewBox="0 0 36 36">
+        <path fill="#34A853" d="M16 16v14h4V20z"></path>
+        <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+        <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+        <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+        <path fill="none"    d="M0 0h36v36H0z"></path>
+      </svg>
+         Create
+      </button></mat-toolbar>
+
+      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div fxFlex="20%">
+          <mat-card>
+            <mat-calendar [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+          </mat-card>
+        </div>
+      </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+          <!-- <mwl-calendar-month-view
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+          </mwl-calendar-month-view> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
